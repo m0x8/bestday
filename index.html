@@ -64,9 +64,19 @@
 
     .error {
       color: #d93025;
-      margin-top: 10px;
+      margin-top: 12px;
       display: none;
-      font-size: 14px;
+      font-size: 15px;
+      background-color: #ffe9e9;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ffcccc;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 500px) {
@@ -81,7 +91,7 @@
     <h1>ادخل كلمه المرور للوصل اللي الصفحه التاليه</h1>
     <input type="password" id="password" placeholder="كلمة المرور" />
     <button onclick="checkPassword()">دخول</button>
-    <div class="error" id="errorMsg">كلمة المرور غير صحيحة</div>
+    <div class="error" id="errorMsg">متحاولش توصل للصفحه دي، هي معموله لشخص معين ومحدش عارف كلمه السر غيرها 😈</div>
   </div>
 
   <script>
