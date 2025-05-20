@@ -100,6 +100,7 @@
       const errorMsg = document.getElementById("errorMsg");
 
       if (passwordInput === "aya2001@" || passwordInput === "Aya2001@") {
+        sessionStorage.setItem("authenticated", "true");
         window.location.href = "second.html";
       } else {
         errorMsg.style.display = "block";
