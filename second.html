@@ -66,9 +66,15 @@
   <div id="footer">𝒜ℳ</div>
 
   <script>
-    const words = ["Aya", "Finally", "We", "Did", "It", "You", "Have", "Become", "My", "Wife"];
+    // تحقق من المصادقة
+    if (!localStorage.getItem('authenticated') || localStorage.getItem('authenticated') !== 'true') {
+      // لو المستخدم ما دخلش الباسورد صح، يرجعه للصفحة الأولى (غير اسم الملف لو لازم)
+      window.location.href = 'index.html'; // غير 'index.html' لاسم صفحتك الأولى إذا اختلف
+    }
+
+    const words = ["Aya", "Finally", "We", "Did", "It", "You", "Have", "become", "My", "Wife"];
     const fullMessage = words.join(" ") + " ❤️";
-    const delay = 1000; // 1 second per word
+    const delay = 1000; // 1 ثانية لكل كلمة
 
     const poem = `رجلٌ وما استسلمْتُ قَبْلَ لفارسٍ
 مالي أمام عيونها مستسلِمُ !؟
