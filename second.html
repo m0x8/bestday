@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Secret Message</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       margin: 0;
       height: 100vh;
       background-color: #111;
-      color: white; /* ✅ اللون الأبيض */
+      color: white;
       font-family: 'Cairo', sans-serif;
       display: flex;
       justify-content: center;
@@ -34,9 +34,18 @@
   <script>
     const words = ["Aya", "Finally", "We,", "Do", "It", "You", "has", "become", "My", "Wife"];
     const fullMessage = words.join(" ");
-    const delay = 1000; // 1.5 seconds
+    const delay = 1000; // 1 second per word
+
     const params = new URLSearchParams(window.location.search);
     let step = parseInt(params.get("step") || "0");
+
+    // لو في باراميتر step في الرابط و الصفحة تم ريفريش فيها (بدون تنقل)، نعيد توجيه للصفحة بدون step عشان تبدأ من الصفر
+    if (params.has("step") && !performance.getEntriesByType("navigation")[0].type.includes("navigate")) {
+      // لما يكون نوع التنقل 'reload' أو 'back_forward' يعني صفحة اتعاد تحميلها
+      // نعالجها بالتحويل للصفحة بدون باراميتر step
+      window.history.replaceState({}, "", window.location.pathname);
+      step = 0;
+    }
 
     const content = document.getElementById("content");
 
