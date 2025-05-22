@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <title>Secret Message</title>
@@ -16,10 +16,22 @@
       align-items: center;
       text-align: center;
       font-size: 2.5rem;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      line-height: 1.5;
     }
-    .word {
+    .word, .final-text {
       opacity: 0;
       animation: fadeIn 0.6s ease forwards;
+      max-width: 100%;
+    }
+    .final-text {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      white-space: pre-line; /* يحافظ على السطور */
+      direction: rtl;
+      font-weight: 600;
+      font-family: 'Cairo', sans-serif;
     }
     @keyframes fadeIn {
       to {
@@ -36,23 +48,46 @@
     const fullMessage = words.join(" ") + " ❤️";
     const delay = 1000; // 1 second per word
 
+    const poem = `رجلٌ وما استسلمْتُ قَبْلَ لفارسٍ
+مالي أمام عيونها مستسلِمُ !؟
+
+أأعودُ منتصِرا بكل معاركي
+وأمام عَيْنيها البريئة أُهْزَمُ !؟
+
+أنا شاعرٌ ما أسعفتْه حروفه
+الحبُّ من لغة المشاعر أعظمُ
+
+لي ألف بيتٍ بالفصيح أجدْتُها
+لكنني في حبها أتلعثمُ !`;
+
     const content = document.getElementById("content");
     let step = 0;
 
     function showWord() {
       if (step < words.length) {
+        content.className = 'word';
         content.style.opacity = 0;
         setTimeout(() => {
           content.textContent = words[step];
           content.style.opacity = 1;
           step++;
           setTimeout(showWord, delay);
-        }, 600); // مدة الأنيميشن نفسها (fadeIn)
+        }, 600);
       } else {
+        content.className = 'word';
         content.style.opacity = 0;
         setTimeout(() => {
           content.textContent = fullMessage;
           content.style.opacity = 1;
+          // بعد 3 ثواني نمسح ونعرض القصيدة
+          setTimeout(() => {
+            content.style.opacity = 0;
+            setTimeout(() => {
+              content.className = 'final-text';
+              content.textContent = poem;
+              content.style.opacity = 1;
+            }, 600);
+          }, 3000);
         }, 600);
       }
     }
