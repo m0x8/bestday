@@ -1,46 +1,67 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الصفحة الثانية</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secret Message</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
+      background-color: #111;
+      color: #fff;
       font-family: 'Cairo', sans-serif;
-      background-color: #f5f7fa;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      overflow: hidden;
     }
 
-    .message {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    h1 {
+    .message-container {
+      display: flex;
+      flex-wrap: wrap;
       font-size: 2rem;
-      color: #007bff;
+      gap: 12px;
+      max-width: 90%;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .word {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="message">
-    <h1>مرحباً بك في الصفحة السرية 🎉</h1>
-    <p>لقد تم التحقق بنجاح.</p>
-  </div>
+  <div class="message-container" id="messageContainer"></div>
 
   <script>
-    const isAuthenticated = sessionStorage.getItem("authenticated");
-    if (isAuthenticated !== "true") {
-      window.location.href = "index.html"; // الرجوع للصفحة الأولى
+    // حماية الصفحة بكلمة السر
+    if (sessionStorage.getItem("authenticated") !== "true") {
+      window.location.href = "index.html";
     }
+
+    // الرسالة
+    const message = "Hi, You. Finally, you have become my wife.".split(" ");
+    const container = document.getElementById("messageContainer");
+
+    message.forEach((word, index) => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.style.animationDelay = `${index * 0.5}s`;
+      span.textContent = word;
+      container.appendChild(span);
+    });
   </script>
 </body>
 </html>
