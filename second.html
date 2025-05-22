@@ -33,30 +33,31 @@
 
   <script>
     const words = ["Aya", "Finally", "We", "Did", "It", "You", "Have", "become", "My", "Wife"];
-    const fullMessage = words.join(" ");
-    const delay = 500; // 1 second per word
-
-    const params = new URLSearchParams(window.location.search);
-    let step = parseInt(params.get("step") || "0");
-
-    // لو في باراميتر step في الرابط و الصفحة تم ريفريش فيها (بدون تنقل)، نعيد توجيه للصفحة بدون step عشان تبدأ من الصفر
-    if (params.has("step") && !performance.getEntriesByType("navigation")[0].type.includes("navigate")) {
-      // لما يكون نوع التنقل 'reload' أو 'back_forward' يعني صفحة اتعاد تحميلها
-      // نعالجها بالتحويل للصفحة بدون باراميتر step
-      window.history.replaceState({}, "", window.location.pathname);
-      step = 0;
-    }
+    const fullMessage = words.join(" ") + " ❤️";
+    const delay = 1000; // 1 second per word
 
     const content = document.getElementById("content");
+    let step = 0;
 
-    if (step < words.length) {
-      content.textContent = words[step];
-      setTimeout(() => {
-        window.location.href = `${window.location.pathname}?step=${step + 1}`;
-      }, delay);
-    } else {
-      content.textContent = fullMessage + " ❤️";
+    function showWord() {
+      if (step < words.length) {
+        content.style.opacity = 0;
+        setTimeout(() => {
+          content.textContent = words[step];
+          content.style.opacity = 1;
+          step++;
+          setTimeout(showWord, delay);
+        }, 600); // مدة الأنيميشن نفسها (fadeIn)
+      } else {
+        content.style.opacity = 0;
+        setTimeout(() => {
+          content.textContent = fullMessage;
+          content.style.opacity = 1;
+        }, 600);
+      }
     }
+
+    showWord();
   </script>
 </body>
 </html>
