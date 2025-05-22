@@ -6,7 +6,84 @@
   <title>صفحة محمية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* نفس التنسيقات كما هي */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f2f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      color: #d93025;
+      margin-top: 12px;
+      display: none;
+      font-size: 15px;
+      background-color: #ffe9e9;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ffcccc;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -23,7 +100,7 @@
       const errorMsg = document.getElementById("errorMsg");
 
       if (passwordInput === "aya2001@" || passwordInput === "Aya2001@") {
-        localStorage.setItem("authenticated", "true"); // استخدم localStorage بدل sessionStorage
+        localStorage.setItem("authenticated", "true");
         window.location.href = "second.html";
       } else {
         errorMsg.style.display = "block";
