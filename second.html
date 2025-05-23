@@ -1,3 +1,4 @@
+<!-- second.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -62,68 +63,23 @@
   </style>
 </head>
 <body>
-  <div id="content" class="word"></div>
+  <div id="content" class="final-text">
+    هفضل شايفك حبيبتي وبنتي وروحي وحياتي وقمري  
+    وعمري كله ودا مش مجرد كلام والله دي مكانك اللي جوايا  
+    ومش هتتغير ابدا ان شاء الله
+  </div>
   <div id="footer">𝒜ℳ</div>
 
   <script>
     // تحقق من المصادقة
     if (!localStorage.getItem('authenticated') || localStorage.getItem('authenticated') !== 'true') {
-      // لو المستخدم ما دخلش الباسورد صح، يرجعه للصفحة الأولى (غير اسم الملف لو لازم)
-      window.location.href = 'index.html'; // غير 'index.html' لاسم صفحتك الأولى إذا اختلف
+      window.location.href = 'index.html';
     }
 
-    const words = ["Aya", "Finally", "We", "Did", "It", "You", "Have", "Become", "My", "Wife"];
-    const fullMessage = words.join(" ") + " ❤️";
-    const delay = 1000; // 1 ثانية لكل كلمة
-
-    const poem = `هفضل شايفك حبيبتي وبنتي وروحي وحياتي وقمري
-    وعمري كله ودا مش مجرد كلام والله دي مكانك اللي جوايا
-    ومش هتتغير ابدا ان شاء الله
-    رجلٌ وما استسلمْتُ قَبْلَ لفارسٍ
-مالي أمام عيونها مستسلِمُ !؟
-
-أأعودُ منتصِرا بكل معاركي
-وأمام عَيْنيها البريئة أُهْزَمُ !؟
-
-أنا شاعرٌ ما أسعفتْه حروفه
-الحبُّ من لغة المشاعر أعظمُ
-
-لي ألف بيتٍ بالفصيح أجدْتُها
-لكنني في حبها أتلعثمُ !`;
-
-    const content = document.getElementById("content");
-    let step = 0;
-
-    function showWord() {
-      if (step < words.length) {
-        content.className = 'word';
-        content.style.opacity = 0;
-        setTimeout(() => {
-          content.textContent = words[step];
-          content.style.opacity = 1;
-          step++;
-          setTimeout(showWord, delay);
-        }, 600);
-      } else {
-        content.className = 'word';
-        content.style.opacity = 0;
-        setTimeout(() => {
-          content.textContent = fullMessage;
-          content.style.opacity = 1;
-          // بعد 3 ثواني نمسح ونعرض القصيدة
-          setTimeout(() => {
-            content.style.opacity = 0;
-            setTimeout(() => {
-              content.className = 'final-text';
-              content.textContent = poem;
-              content.style.opacity = 1;
-            }, 600);
-          }, 3000);
-        }, 600);
-      }
-    }
-
-    showWord();
+    // بعد 5 ثواني ننتقل للصفحة اللي فيها باقي الرسالة
+    setTimeout(() => {
+      window.location.href = "third.html"; // لازم تعمل الصفحة دي
+    }, 5000);
   </script>
 </body>
 </html>
